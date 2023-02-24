@@ -56,9 +56,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::188527884040:role/GitHubOIDC
+        aws-access-key-id: AKIASXZJDG4EGMIGDV6Z
+        aws-secrete-access-key: 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
         aws-region: us-west-1
-        role-session-name: GitHub-OIDC-TERRAFORM
 
     - name: Login to Amazon ECR
       id: login-ecr
