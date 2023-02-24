@@ -29,9 +29,17 @@ jobs:
         push: true
         tags: <${{ secrets.AWS_ACCOUNT_ID }}>.dkr.ecr.<${{ secrets.AWS_REGION }}>.amazonaws.com/<${{ secrets.AWS_ECR_REPO_NAME }}>:latest
 
-    - name: Deploy to ECS
-      uses: aws-actions/ecs-deploy@v1
+#     - name: Deploy to ECS
+#       uses: aws-actions/ecs-deploy@v1
+#       with:
+#         cluster: <${{ secrets.CLUSTER_NAME }}>
+#         service: <${{ secrets.SERVICE_NAME }}>
+#         image: <${{ secrets.AWS_ACCOUNT_ID }}>.dkr.ecr.<${{ secrets.AWS_REGION }}>.amazonaws.com/<${{ secrets.AWS_ECR_REPO_NAME }}>:latest
+        
+    - name: Deploy to Amazon ECS
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        cluster: <${{ secrets.CLUSTER_NAME }}>
+#         task-definition: task-definition.json
         service: <${{ secrets.SERVICE_NAME }}>
-        image: <${{ secrets.AWS_ACCOUNT_ID }}>.dkr.ecr.<${{ secrets.AWS_REGION }}>.amazonaws.com/<${{ secrets.AWS_ECR_REPO_NAME }}>:latest
+        cluster: <${{ secrets.CLUSTER_NAME }}>
+        wait-for-service-stability: true
